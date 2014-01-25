@@ -23,10 +23,10 @@ Some interaction design challenges:
 
 ## Introduced to
 This sample introduces you to:
-* Event handling
-* DOM insertion
-* CSS manipulation (and also transitions via Transit)
-* String processing (http://www.codecademy.com/glossary/javascript#strings)
-* Random number generation (http://www.codecademy.com/glossary/javascript#math)
-* Associating data with DOM elements
-* Iterating through arrays (http://www.codecademy.com/glossary/javascript#arrays_accessing-array-elements)
+* Event handling [more](http://learn.jquery.com/events/)
+* DOM insertion [more](http://api.jquery.com/appendTo/)
+* CSS manipulation [more](http://api.jquery.com/css/) (and also transitions via [Transit](http://ricostacruz.com/jquery.transit/))
+* String processing [more](http://www.codecademy.com/glossary/javascript#strings)
+* Random number generation [more](http://www.codecademy.com/glossary/javascript#math)
+* Associating data with DOM elements [more](http://api.jquery.com/jquery.data/)
+* Iterating through arrays [more](http://www.codecademy.com/glossary/javascript#arrays_accessing-array-elements)
