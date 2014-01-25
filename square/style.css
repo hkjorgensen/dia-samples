@@ -1,0 +1,16 @@
+.square {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+}
+
+#console {
+	position: absolute;
+	top: 1em;
+	left: 1em;
+	font-size: 2em;
+	padding: 0.2em;
+	z-index: 500; /* Make it float above everything */
+	box-shadow: 3px 3px 30px 3px white;
+	background-color: #D8D8D8;
+}

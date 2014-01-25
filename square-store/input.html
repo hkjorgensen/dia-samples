@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>square-store input</title>
+
+	<!-- Make the page a bit more mobile-friendly -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, target-densitydpi=device-dpi">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<link rel='stylesheet' href='/bower_components/pure/pure-min.css'>
+	<link rel='stylesheet' href='/base.css'>
+	<link rel='stylesheet' href='style.css'>
+
+</head>
+<body>
+	<fieldset id="console">
+		<input placeholder="Type here" />
+		<button class="pure-button">OK</button>
+	</fieldset>
+	<p>Try 'square', 'colour <em>colour</em>' (eg 'colour black'), and 'clear colour'</p>
+</body>
+
+<!-- Import libraries such as jQuery etc -->
+<script src="/bower_components/libraries.js"></script>
+
+<!-- Add in Socket.io: this is needed for any realtime stuff -->
+<script src="/socket.io/socket.io.js"></script>
+
+<script src="input.js"></script>
+
+<!-- Imports a script that does the live reloading trick -->
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js"></' + 'script>')</script>
+
+</html>
