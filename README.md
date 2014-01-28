@@ -6,7 +6,7 @@ This will be the same place as the template page is found.
 
 The code for each sample is well-documented, and further notes are in README.md
 
-You can grab the code on the Github website as a zip file, use a Github app.
+You can grab the code on the [Github website](https://github.com/ClintH/dia-samples/) as a [zip](https://github.com/ClintH/dia-samples/archive/master.zip) file, use a Github app.
 
 ## Via git
 Change to a directory where you would like to keep a copy of the samples. For example:
