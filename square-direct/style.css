@@ -1,0 +1,26 @@
+.square {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	z-index: 0;
+	background-color: silver;
+	opacity: 0.7;
+}
+
+#squarePlaceholder {
+	left: 100px;
+	top: 100px;
+	background-color: silver;
+	border: 2px solid black;
+	box-shadow: 3px 3px 30px 3px black;
+	z-index: 99999;
+}
+.canvas {
+	background-color: #FAFAFA;
+}
+#console {
+	font-size: 2em;
+	padding: 0.2em;
+	box-shadow: 3px 3px 30px 3px white;
+}
+
