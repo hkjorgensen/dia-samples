@@ -29,7 +29,7 @@ $(document).ready(function() {
 
 
 function onEvent(e) {
-	// e.originalEvent contains a lot of the useful data
+	// e.gesture contains a lot of the useful data
   var g = e.gesture;
   var data = '<div>' +
   					 '<div><strong>'+ e.type + '</strong></div>' +

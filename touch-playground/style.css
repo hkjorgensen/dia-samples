@@ -2,13 +2,12 @@ html,
 body {
   height: 100%;
   margin: 0;
-  padding: 2%;
 }
 
 section {
   position: relative;
   display: inline-block;
-  border: 2px dashed black;
+  background-color: white;
   width: 60%;
   height: 90%;
 }
@@ -16,7 +15,6 @@ section {
 section:before {
   position: absolute;
   display: inline-block;
-  content: "Touch here";
   color: black;
   font-weight: bold;
   text-align: center;
@@ -33,4 +31,8 @@ aside {
   overflow: hidden;
   width: 30%;
   height: 90%;
+}
+
+aside>div {
+  border-bottom: 1px solid gray;
 }
