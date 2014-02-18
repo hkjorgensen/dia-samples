@@ -6,5 +6,6 @@ body {
 }
 
 body {
-  background: rgb(0,0,0);
+  background: black;
+  -ms-touch-action: none;
 }

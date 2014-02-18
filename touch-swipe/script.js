@@ -3,21 +3,22 @@
  * Setup
  *
 */
+$(document).ready(function() {
+  //Prevent normal iOS/Android touch gestures
+  $('body').on('touchmove', function(e) { 
+    e.preventDefault()
+  });
 
-//Prevent normal iOS/Android touch gestures
-$('body').on('touchmove', function(e) { e.preventDefault() });
+  // Important! Initialise Hammer
+  $('body').hammer();
 
-/*
- *
- * Custom actions
- *
-*/
+  // Listen for swipe event
+  $('body').on('swipe', onSwipe);
+});
 
-//Create reusable reference to the element
-var element = document.querySelector('body');
 
 //Change color based on velocity
-Hammer(element).on('swipe', function(e) {
+function onSwipe(e) {
   var velocityX = e.gesture.velocityX;
   var max = 4; // The highest allowed velocity value
   var newRedColor = 0;
@@ -32,5 +33,7 @@ Hammer(element).on('swipe', function(e) {
   newRedColor = Math.round(newRedColor);
 
   //Change the color!
-  $(element).css('background', 'rgb('+ newRedColor +',0,0)');
-});
+  $('body').css({
+    'background-color': 'rgb('+ newRedColor +',0,0)'
+  });
+}
