@@ -1,14 +1,16 @@
 
 $(document).ready(function() {
 	//Prevent normal iOS/Android touch gestures
-	$('body').on('touchmove', function(e) { e.preventDefault() });
+	$('body').on('touchmove', function(e) {
+    e.preventDefault();
+  });
 
   // Initialise Hammer (important!)
   $('body').hammer({prevent_default:true});
 
 	//Enable extra debug on desktop browsers
-	Hammer.plugins.showTouches();
-	Hammer.plugins.fakeMultitouch();
+	// Hammer.plugins.showTouches();
+	// Hammer.plugins.fakeMultitouch();
 
 	//What kind of events should be logged
 	// 'events.join' later on

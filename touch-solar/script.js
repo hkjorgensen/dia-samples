@@ -7,7 +7,12 @@ var planet = null;
 
 $(document).ready(function() {
   //Prevent normal iOS/Android touch gestures
-  $('body').on('touchmove', function(e) { e.preventDefault() });
+  $('body').on('touchmove', function(e) {
+    e.preventDefault()
+  });
+
+  // Initialise Hammer (important!)
+  $('body').hammer({prevent_default:true});
 
   //Enable extra debug on desktop browsers
   Hammer.plugins.showTouches();
@@ -38,7 +43,7 @@ function onTap(e) {
     });
 
   //Insert the star
-  $(element).append(star);
+  $('body').append(star);
 }
 
 /*
@@ -73,7 +78,7 @@ function onPinch(e) {
         'width': size,
         'height': size
       });
-    $(element).append(planet);
+    $('body').append(planet);
   }
 }
 
@@ -102,7 +107,7 @@ function onRelease() {
 /*
  * Delete a planet
 */
-function onHold() {
+function onHold(e) {
   var target = e.target;
 
   // All the planets are made from HTML '<figure>' elements, so we can easily check
