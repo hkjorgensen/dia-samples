@@ -7,7 +7,12 @@ var planet = null;
 
 $(document).ready(function() {
   //Prevent normal iOS/Android touch gestures
-  $('body').on('touchmove', function(e) { e.preventDefault() });
+  $('body').on('touchmove', function(e) {
+    e.preventDefault()
+  });
+
+  // Initialise Hammer (important!)
+  $('body').hammer({prevent_default:true});
 
   //Enable extra debug on desktop browsers
   Hammer.plugins.showTouches();
@@ -33,12 +38,12 @@ function onTap(e) {
   //Create a star with the correct position
   var star = $('<aside></aside>')
     .css({
-      top: top,
-      left: left
+      'top': top,
+      'left': left
     });
 
   //Insert the star
-  $(element).append(star);
+  $('body').append(star);
 }
 
 /*
@@ -59,21 +64,21 @@ function onPinch(e) {
 
     planet
       .css({
-        width: size,
-        height: size,
+        'width': size,
+        'height': size,
         'margin-left': (-1 * (size/2)), //Center position
         'margin-top': (-1 * (size/2))   //Center position
-      }); 
+      });
   } else {
     //Create the planet
     planet = $('<figure></figure>')
       .css({
-        top: top,
-        left: left,
-        width: size,
-        height: size
+        'top': top,
+        'left': left,
+        'width': size,
+        'height': size
       });
-    $(element).append(planet);
+    $('body').append(planet);
   }
 }
 
@@ -102,7 +107,7 @@ function onRelease() {
 /*
  * Delete a planet
 */
-function onHold() {
+function onHold(e) {
   var target = e.target;
 
   // All the planets are made from HTML '<figure>' elements, so we can easily check
