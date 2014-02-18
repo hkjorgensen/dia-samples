@@ -2,30 +2,15 @@ html,
 body {
   height: 100%;
   margin: 0;
-  padding: 2%;
 }
 
 section {
   position: relative;
   display: inline-block;
-  border: 2px dashed black;
   width: 60%;
+  background-color: white;
   height: 90%;
-}
-
-section:before {
-  position: absolute;
-  display: inline-block;
-  content: "Play here :-)";
-  color: black;
-  font-weight: bold;
-  text-align: center;
-  width: 100px;
-  top: 50%;
-  left: 50%;
-  heigth: 40px;
-  margin-left: -50px;
-  margin-top: -20px;
+  -ms-touch-action: none;
 }
 
 aside {
@@ -33,4 +18,8 @@ aside {
   overflow: hidden;
   width: 30%;
   height: 90%;
+}
+
+aside>div {
+  border-bottom: 1px solid gray;
 }
