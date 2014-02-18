@@ -33,5 +33,5 @@ $ git pull
 ## Remote debugging
 Remote debugging is available for iOS and Android with a laptop.
 
-[How to remote debug on iOS](http://moduscreate.com/enable-remote-web-inspector-in-ios-6/)
-[How to remote debug on Android](https://developers.google.com/chrome-developer-tools/docs/remote-debugging)
+* [How to remote debug on iOS](http://moduscreate.com/enable-remote-web-inspector-in-ios-6/)
+* [How to remote debug on Android](https://developers.google.com/chrome-developer-tools/docs/remote-debugging)
