@@ -41,7 +41,6 @@ aside {
   background: #F6F6F6;
   animation: glitter 4.5s linear 0s infinite normal;
   -webkit-animation: glitter 4.5s linear 0s infinite normal;
-  -moz-animation: glitter 4.5s linear 0s infinite normal;
 }
 
 /* css3 keyframes for glittering effect */
@@ -58,11 +57,4 @@ aside {
   50%  { -webkit-transform: scale(1.0); opacity: 1; }
   75%  { -webkit-transform: scale(0.5); opacity: 0; }
   100% { -webkit-transform: scale(1.0); opacity: 1; }
-}
-@-moz-keyframes glitter {
-  0%   { -moz-transform: scale(1.0); opacity: 1; }
-  25%  { -moz-transform: scale(0.5); opacity: 0; }
-  50%  { -moz-transform: scale(1.0); opacity: 1; }
-  75%  { -moz-transform: scale(0.5); opacity: 0; }
-  100% { -moz-transform: scale(1.0); opacity: 1; }
 }
