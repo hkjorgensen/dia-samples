@@ -3,47 +3,51 @@
  * Setup
  *
 */
+var planet = null;
 
-//Prevent normal iOS/Android touch gestures
-$('body').on('touchmove', function(e) { e.preventDefault() });
+$(document).ready(function() {
+  //Prevent normal iOS/Android touch gestures
+  $('body').on('touchmove', function(e) { e.preventDefault() });
 
-//Enable extra debug on desktop browsers
-Hammer.plugins.showTouches();
-Hammer.plugins.fakeMultitouch();
+  //Enable extra debug on desktop browsers
+  Hammer.plugins.showTouches();
+  Hammer.plugins.fakeMultitouch();
 
-//Create a reference to the element
-var element = document.querySelector('body');
+  // Listen for Hammer.js-provided events
+  $('body').on('tap', onTap);
+  $('body').on('pinch', onPinch);
+  $('body').on('rotate', onRotate);
+  $('body').on('release', onRelease);
+  $('body').on('hold', onHold);
+});
 
-/*
- *
- * Custom actions
- *
-*/
 
 /*
  * Create a new star
 */
-Hammer(element).on('tap', function(e) {
+function onTap(e) {
   //Get the coordinates
   var top = e.gesture.center.pageY;
   var left = e.gesture.center.pageX;
 
   //Create a star with the correct position
   var star = $('<aside></aside>')
-    .css('top', top)
-    .css('left', left);
+    .css({
+      top: top,
+      left: left
+    });
 
   //Insert the star
   $(element).append(star);
-});
+}
 
 /*
  * Create a new planet
 */
-var planet = undefined;
-Hammer(element).on('pinch', function(e){
+
+function onPinch(e) {
   //Get the coordinates
-  var size = '10';
+  var size = 10;
   var top = e.gesture.center.pageY;
   var left = e.gesture.center.pageX;
   var scale = e.gesture.scale;
@@ -54,25 +58,27 @@ Hammer(element).on('pinch', function(e){
     size = size * scale;
 
     planet
-      .css('width', size)
-      .css('height', size)
-      .css('margin-left', -1 * (size/2)) //Center position
-      .css('margin-top', -1 * (size/2)); //Center position
-
+      .css({
+        width: size,
+        height: size,
+        'margin-left': (-1 * (size/2)), //Center position
+        'margin-top': (-1 * (size/2))   //Center position
+      }); 
   } else {
     //Create the planet
     planet = $('<figure></figure>')
-      .css('top', top)
-      .css('left', left)
-      .css('width', size)
-      .css('height', size);
-
+      .css({
+        top: top,
+        left: left,
+        width: size,
+        height: size
+      });
     $(element).append(planet);
   }
-});
+}
 
 /* Adjust the planet color based on rotation */
-Hammer(element).on('rotate', function(e) {
+function onRotate(e) {
   var rotation = e.gesture.rotation;
   var hue = rotation + 360;
 
@@ -81,23 +87,28 @@ Hammer(element).on('rotate', function(e) {
 
   if (planet) {
     //HSL values: http://hslpicker.com/
-    planet.css('background', 'hsl('+hue+',100%,20%)');
+    planet.css({
+      'background-color': 'hsl('+hue+',100%,20%)'
+    });
   }
-});
+}
 
 /* Cleanup references */
-Hammer(element).on('release', function() {
+function onRelease() {
   //cleanup
-  planet = undefined;
-});
+  planet = null;
+}
 
 /*
  * Delete a planet
 */
-Hammer(element).on('hold', function(e) {
+function onHold() {
   var target = e.target;
+
+  // All the planets are made from HTML '<figure>' elements, so we can easily check
+  // if it's a planet or not
   if (target.tagName === 'FIGURE') {
-    //Remove the planet
+    // Yep, a planet - remove!
     $(target).remove();
   }
-});
+}
