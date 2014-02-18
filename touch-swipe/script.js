@@ -5,8 +5,8 @@
 */
 $(document).ready(function() {
   //Prevent normal iOS/Android touch gestures
-  $('body').on('touchmove', function(e) { 
-    e.preventDefault()
+  $('body').on('touchmove', function(e) {
+    e.preventDefault();
   });
 
   // Important! Initialise Hammer

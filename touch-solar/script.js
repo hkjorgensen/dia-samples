@@ -33,8 +33,8 @@ function onTap(e) {
   //Create a star with the correct position
   var star = $('<aside></aside>')
     .css({
-      top: top,
-      left: left
+      'top': top,
+      'left': left
     });
 
   //Insert the star
@@ -59,19 +59,19 @@ function onPinch(e) {
 
     planet
       .css({
-        width: size,
-        height: size,
+        'width': size,
+        'height': size,
         'margin-left': (-1 * (size/2)), //Center position
         'margin-top': (-1 * (size/2))   //Center position
-      }); 
+      });
   } else {
     //Create the planet
     planet = $('<figure></figure>')
       .css({
-        top: top,
-        left: left,
-        width: size,
-        height: size
+        'top': top,
+        'left': left,
+        'width': size,
+        'height': size
       });
     $(element).append(planet);
   }
