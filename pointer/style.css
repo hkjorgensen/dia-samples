@@ -1,5 +1,6 @@
 * {
   -webkit-user-select: none;
+  -ms-touch-action: none;
 }
 
 html,

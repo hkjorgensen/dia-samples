@@ -1,36 +1,37 @@
-/*
- *
- * Setup
- *
-*/
-
-//Prevent normal iOS/Android touch gestures
-$('body').on('touchmove', function(e) { e.preventDefault() });
-
-/*
- *
- * Custom actions
- *
-*/
-
 //Create a reference to the element
 var timer;
 
+$(document).ready(function() {
+	// Prevent normal iOS/Android touch gestures
+	$('body').on('touchmove', function(e) { e.preventDefault() });
+	$('section').on('pointerdown', onPointerDown);
+	$('section').on('pointerup', onPointerUp);
+});
+
 function changeToRed() {
-  $('section').css('background', 'red');
+  $('section').css({
+  	'background-color': 'red'
+  });
 }
 
 //Change the color of the element when it is touched
-$('section').on('pointerdown', function() {
-  $('section').css('background', 'orange');
+function onPointerDown(e) {
+	// Prevent default browser action
+	e.stopPropagation();
+
+  $('section').css({
+  	'background-color': 'orange'
+  });
 
   //Lets emulate a longpres (> 1second)
   timer = setTimeout(changeToRed, 1000);
-});
+}
 
 //Change the color of the element when the touch ends
-$('section').on('pointerup', function() {
-  $('section').css('background', 'blue');
+function onPointerUp() {
+  $('section').css({
+  	'background-color': 'blue'
+  });
   clearTimeout(timer);
-});
+}
 
