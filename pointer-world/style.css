@@ -1,0 +1,21 @@
+* {
+  -webkit-user-select: none;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.cursor {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  background: blue;
+  border: 1px solid white;
+}
