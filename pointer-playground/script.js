@@ -1,14 +1,13 @@
-/*
- *
- * Setup
- *
-*/
 
-//Prevent normal iOS/Android touch gestures
-$('body').on('touchmove', function(e) { e.preventDefault() });
+$(document).ready(function() {
+	//Prevent normal iOS/Android touch gestures
+
+	$('body').on('touchmove', function(e) { e.preventDefault() });
+	$('section').on("pointerdown pointerup pointermove pointerover pointerout pointerenter pointerleave", onEvent);
+});
 
 // Listen to all of the pointer events within the 'section' element
-$('section').on("pointerdown pointerup pointermove pointerover pointerout pointerenter pointerleave", function(e) {
+function onEvent(e) {
 	// Print out some useful information to a DIV
   
 	// e.originalEvent contains a lot of the useful data
@@ -20,4 +19,4 @@ $('section').on("pointerdown pointerup pointermove pointerover pointerout pointe
   					 '<div>' + orig.pointerType + ' x: ' + Math.floor(orig.x) + " y: " + Math.floor(orig.y) + " button: " + orig.button + " id: " +  orig.pointerId + '</div>' +
   					 '</div>'
   $('aside').prepend(data);
-});
+}
