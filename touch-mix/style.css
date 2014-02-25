@@ -1,0 +1,61 @@
+* {
+  -webkit-user-select: none;
+}
+
+html {
+	padding: 0;
+	margin: 0;
+}
+body {
+	padding: 1em;
+	-webkit-perspective: 400;
+}
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+#current {
+	float: left;
+	font-size: 3em;
+	width: 100%;
+	text-align: center;
+}
+
+#swatches {
+	background: white;
+}
+#swatches div {
+	height: 2em;
+	width: 2em;
+	margin: 0.2em;
+	display: inline-block;
+	float: left;
+	border-radius: 50%;
+}
+
+#demoHolder {
+	margin-left: 50%;
+}
+#demoTransform {
+	width: 2em;
+	height: 2em;
+	background-color: silver;
+	font-size: 4em;
+	display: table-cell;
+	vertical-align:middle;
+	text-align: center;
+}
+
+#thingHolder {
+	margin-left: 5em;
+	height: 100%;
+	margin-top: 5em;
+}
+#thing {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 10em;
+}
