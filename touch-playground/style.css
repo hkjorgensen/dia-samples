@@ -2,6 +2,7 @@ html,
 body {
   height: 100%;
   margin: 0;
+  -ms-touch-action: none;
 }
 
 section {
@@ -21,7 +22,7 @@ section:before {
   width: 100px;
   top: 50%;
   left: 50%;
-  heigth: 40px;
+  height: 40px;
   margin-left: -50px;
   margin-top: -20px;
 }
