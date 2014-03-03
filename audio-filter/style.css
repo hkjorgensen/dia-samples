@@ -1,0 +1,11 @@
+* {
+  -webkit-user-select: none;
+  -ms-touch-action: none;
+}
+
+#pad {
+	background:white;
+	height: 500px;
+	width: 500px;
+	margin-top: 1em;
+}
