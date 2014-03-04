@@ -1,7 +1,7 @@
 var audio = null;
-var panners = {}
 var playing = false;
 var samples= {};
+var panners = {};
 var sources = {};
 
 var autoPanValue = 0;
@@ -17,10 +17,11 @@ $(document).ready(function() {
 
   // Set up audio and load samples
   samples = {
-    chords: 'chords.mp3',
-    vox:    'vox.mp3',
-    piano:  'piano.mp3',
-    pad:    'pad.mp3',
+    bass:  'bass.mp3',
+    drums: 'drums.mp3',
+    hats:  'hats.mp3',
+    pad:   'pad.mp3',
+    piano: 'piano.mp3'
   }
   // Insert boxes to control each sample
   _.forIn(samples, function(url, name) {
