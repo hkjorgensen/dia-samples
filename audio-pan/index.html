@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>audio-filter</title>
+  <title>audio-pan</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -12,19 +12,21 @@
 </head>
 
 <body touch-action="none">
-  <h1>audio-filter</h1>
+  <h1>audio-pan</h1>
   <p>
-    Press START to play a loop and move your pointer around inside white box below to adjust the filter.
+    Press START to start the loops, or double-tap box to start/stop. Drag boxes to position the audio. Sounds best with headphones.
   </p>
   <p>
     <button class="pure-button" id="startButton">Start</button>
     <button class="pure-button" id="stopButton">Stop</button>
+    <button class="pure-button" id="autoPanButton">Auto Pan</button>
   </p>
   <p>
-    Filter: <span id="filter">-</span> Q: <span id="q">-</span>
+    <span id="pan"></span>
   </p>
-  <div id="pad">
-   
+  <div id="panArea">
+
+   <div id="listener"></div>
   </div>
 
   <!-- Import libraries and our own script.js -->

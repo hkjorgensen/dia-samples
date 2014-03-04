@@ -1,0 +1,36 @@
+* {
+  -webkit-user-select: none;
+  -ms-touch-action: none;
+}
+
+#panArea {
+	background:white;
+	height: 500px;
+	width: 500px;
+	margin-top: 1em;
+	position:relative;
+}
+
+.source {
+	width: 50px;
+	height: 50px;
+	background-color: silver;
+	float: left;
+	position: absolute;
+}
+
+.playing {
+	background-color: #131311;
+	color: white;
+}
+
+#listener {
+	position: absolute;
+	left: 200px;
+	top: 200px;
+	height: 100px;
+	width: 100px;
+	border: 1px solid silver;
+	border-radius: 100%;
+	pointer-events: none; /* make invisible to pointer */
+}

@@ -3,19 +3,19 @@ var audio = null;
 $(document).ready(function() {
   // Listen for user interaction
   $("#playButton").on("click", onPlayClick);
-  $("#playRhythm").on("click", playRhythm);
+  $("#playRhythm").on("click", onPlayRhythm);
 
   // Set up audio
-  // (initializeAudio and loadSound are found in audio.js)
-  audio = initializeAudio();
+  // Take a look at /bower_components/kattegat-client/audio.js to see more
+  audio = kattegatAudio.initialize();
 
   // Load a single sample
-  loadSound('cowbell', 'cowbell.wav', function(name) {
-    console.log("'" + name + "'' loaded!");
+  kattegatAudio.load('cowbell', 'cowbell.wav', function(name) {
+    console.log("'" + name + "' loaded");
   });
 
   // Load a bunch of samples
-  loadSounds({
+  kattegatAudio.loadSet({
     kick: 'kick.wav',
     snare: 'snare.wav',
     hihat: 'hihat.wav'
@@ -30,7 +30,18 @@ $(document).ready(function() {
   // files are fetched.
 });
 
-function playRhythm() {
+// Plays a sample
+//  We use the 'play' function from audio.js
+function onPlayClick() {
+  // Start it immediately
+  kattegatAudio.play('cowbell', 0)
+  
+  // Or, if we wanted to play 5 seconds in the future:
+  //kattegatAudio.play(audio.currentTime + 5);
+}
+
+// Plays a sequence of audio
+function onPlayRhythm() {
   // Start 100ms in the future
   var startAt = audio.currentTime + 0.100;
 
@@ -44,30 +55,21 @@ function playRhythm() {
     var t = startAt + (bar * 4 * beatInterval);
 
     // Play kick at beats 1, 2, 3 and 4
-    playSound('kick', t + 0*beatInterval);
-    playSound('kick', t + 1*beatInterval);
-    playSound('kick', t + 2*beatInterval);
-    playSound('kick', t + 3*beatInterval);
+    kattegatAudio.play('kick', t + 0*beatInterval);
+    kattegatAudio.play('kick', t + 1*beatInterval);
+    kattegatAudio.play('kick', t + 2*beatInterval);
+    kattegatAudio.play('kick', t + 3*beatInterval);
 
     // Play snare every 8th
-    playSound('snare', t + 1*eigthInterval);
-    playSound('snare', t + 3*eigthInterval);
-    playSound('snare', t + 5*eigthInterval);
-    playSound('snare', t + 7*eigthInterval);
+    kattegatAudio.play('snare', t + 1*eigthInterval);
+    kattegatAudio.play('snare', t + 3*eigthInterval);
+    kattegatAudio.play('snare', t + 5*eigthInterval);
+    kattegatAudio.play('snare', t + 7*eigthInterval);
 
     // Play hithat every 16th, skipping last
     for (var i=0;i<15;i++) {
-      playSound('hihat', t + i*sixteenthInterval);
+      kattegatAudio.play('hihat', t + i*sixteenthInterval);
     }
   }
 }
 
-// Plays a sample
-//  We use the 'playSound' function from audio.js
-function onPlayClick() {
-  // Start it immediately
-  playSound('cowbell', 0)
-  
-  // Or, if we wanted to play 5 seconds in the future:
-  //playSound(audio.currentTime + 5);
-}

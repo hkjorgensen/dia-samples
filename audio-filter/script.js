@@ -10,8 +10,8 @@ $(document).ready(function() {
 
   // Set up audio and load samples
   // (initializeAudio and loadSound are found in audio.js)
-  audio = initializeAudio();
-  loadSound('loop', 'loop0.wav');
+  audio = kattegatAudio.initialize();
+  kattegatAudio.load('loop', 'loop0.mp3');
 
   $("#stopButton").hide();
 });
@@ -41,7 +41,7 @@ function onStopClick() {
 //  Connects the sample source to a filter, and then to the speakers
 function setupAndPlayLoop() {
   // Get audio source node for the loaded sample
-  loopSource = getSource('loop');
+  loopSource = kattegatAudio.getSource('loop');
   loopSource.loop = true;
 
   // Create a a filter
@@ -66,7 +66,7 @@ function onPointermove(e) {
   var e = e.originalEvent;
 
   // Get a relative X/Y position according to the
-  // pointer position and the size of the box
+  // pointer position and the size of the box.
   var relativeX = e.offsetX / $(e.target).outerWidth();
   var relativeY = e.offsetY / $(e.target).outerHeight();
 
@@ -81,9 +81,13 @@ function onPointermove(e) {
   var maxFreq = 1800;
 
   // Use the x% to get between min and maxFreq
-  loopFilter.frequency.value = (relativeX * maxFreq - minFreq) + minFreq;
-  
+  loopFilter.frequency.value = (relativeX * (maxFreq - minFreq)) + minFreq;
+
   // Use the y% to set the Q (0.0001 - 10000)
   loopFilter.Q.value = relativeY * 100; // Using a max of 100 because 1000 is nuts
+ 
+  // Show the numbers on the page for debugging  
+  $("#filter").text(Math.round(loopFilter.frequency.value)); 
+  $("#q").text(Math.round(loopFilter.Q.value));
 
 }
