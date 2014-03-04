@@ -111,6 +111,7 @@ function onSourceDoubletap(e) {
   // we can sort of check playing status by checking for the class
   if ($(e.target).hasClass("playing")) {
     sources[e.target.id].stop(0);
+    $(e.target).removeClass("playing");
   } else {
     setupAndPlayLoop(e.target.id);
   }
@@ -131,7 +132,11 @@ function onStopClick() {
 
   // Stop all the samples
   _.forIn(samples, function(value, name) {
-    sources[name].stop(0);  
+    // Stop only if the sample is playing]
+    if ($("#" + name).hasClass("playing")) {
+      sources[name].stop(0);
+      $("#" + name).removeClass("playing");
+    }
  });
 }
 
