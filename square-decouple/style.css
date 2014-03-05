@@ -16,3 +16,7 @@
 	z-index: 500; /* Make it float above everything */
 	box-shadow: 3px 3px 30px 3px white;
 }
+
+body {
+	-webkit-transform-style: preserve-3d;
+}

@@ -7,8 +7,13 @@
 .canvas {
 	background-color: #FAFAFA;
 }
+
 #console {
 	font-size: 2em;
 	padding: 0.2em;
 	box-shadow: 3px 3px 30px 3px white;
+}
+
+body {
+	-webkit-transform-style: preserve-3d;
 }

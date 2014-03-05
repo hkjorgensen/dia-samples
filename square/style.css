@@ -4,6 +4,10 @@
 	position: absolute;
 }
 
+body {
+	-webkit-transform-style: preserve-3d;
+}
+
 #console {
 	position: absolute;
 	top: 1em;
