@@ -58,3 +58,7 @@ Remote debugging is available for iOS and Android, and is very simple to set up.
 
 * [How to remote debug on iOS](http://moduscreate.com/enable-remote-web-inspector-in-ios-6/)
 * [How to remote debug on Android](https://developers.google.com/chrome-developer-tools/docs/remote-debugging)
+
+## Ressources
+* [Alphabetical list of CSS Properties](http://ref.openweb.io/CSS/)
+* [$/jQuery API](http://api.jquery.com)
