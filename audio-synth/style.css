@@ -1,0 +1,15 @@
+* {
+  -webkit-user-select: none;
+  -ms-touch-action: none;
+}
+
+section {
+	background:white;
+	height: 500px;
+	width: 500px;
+	margin-top: 1em;
+}
+
+section.crosshair {
+  cursor: crosshair;
+}
