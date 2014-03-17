@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>audio-input</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel='stylesheet' href='/bower_components/pure/pure-min.css'>
+  <link rel='stylesheet' href='/base.css'>
+  <link rel='stylesheet' href='style.css'>
+</head>
+<body touch-action="none">
+  <h1>audio-input</h1>
+  <p>
+    <button class="pure-button" id="listenButton">Start listening</button>
+  </p>
+    <div id="overall" class="rangeBox">
+      <h3>Overall</h3>
+      <div class="liveValue">?</div>
+      <div>
+        High: <span class="rangeHigh">?</span><br />
+        Low: <span class="rangeLow">?</span><br />
+        Smoothed: <span class="rangeSmoothed">?</span><br />
+        <button class="pure-button" name="resetButton">Reset</button>
+      </div>
+    </div>
+  
+    <div id="range" class="rangeBox">
+      <h3>Range</h3>
+      <input id="rangeStart" width="3" value="0", placeholder="start"> -
+      <input id="rangeEnd" value="256" placeholder="stop"><br />
+      <button class="pure-button" name="setRange">Set</button><br />
+      <div class="liveValue">?</div>
+      <div>
+        High: <span class="rangeHigh">?</span><br />
+        Low: <span class="rangeLow">?</span><br />
+        Smoothed: <span class="rangeSmoothed">?</span><br />
+        <button class="pure-button" name="resetButton">Reset</button>
+      </div>
+    </div>
+    
+
+  <p>
+    <canvas></canvas>
+  </p>
+
+  <script src="/bower_components/libraries.js"></script>
+  <script src="script.js"></script>
+  <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js"></' + 'script>')</script>
+
+</body>
+</html>

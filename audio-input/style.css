@@ -1,0 +1,29 @@
+* {
+  -webkit-user-select: none;
+  -ms-touch-action: none;
+}
+
+.rangeBox {
+	padding: 1em;
+	display: inline-block;
+	float: left;
+}
+
+.liveValue {
+	font-size: 200%;
+	width: 2em;
+	padding-left: 1em;
+}
+
+.rangeBox input {
+	width: 3em;
+}
+
+canvas {
+	width: 512px;
+	height: 200px;
+}
+.rangeBox>div {
+	float: right;
+	text-align: right;
+}
