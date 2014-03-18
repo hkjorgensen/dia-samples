@@ -17,6 +17,7 @@ $(document).ready(function() {
   $('section').on('pointermove', onPointerMove);
 });
 
+//This function setups and instance of kattegatAudio for later use.
 function setupSound() {
   audio = kattegatAudio.initialize();
   oscillator = audio.createOscillator();
@@ -38,20 +39,23 @@ function setupSound() {
   oscillator.start(0);
 }
 
+//When use clicks or touches the screen
 function onPointerDown(e) {
+  //This reference is used w/ onPointerMove
   isPointerActive = true;
 
-  //Add visual class
+  //Add visual aid
   $('section').addClass('crosshair');
 
   //Update the pointer to provide instant feedback
-  onPointerMove(e)
+  onPointerMove(e);
 }
 
 function onPointerUp() {
+  //This reference is used w/ onPointerMove
   isPointerActive = false;
 
-  //Add visual class
+  //Add visual aid
   $('section').removeClass('crosshair');
 
   //Turn volume down to zero
@@ -59,17 +63,20 @@ function onPointerUp() {
 }
 
 function onPointerMove(e) {
+  //Stop if the user isn't clicking/touching the screen
   if (!isPointerActive) { return; }
 
   var org = e.originalEvent;
-  var x = org.offsetX;
-  var y = org.offsetY;
-  var noteValue = calculateNote(x);
-  var volumeValue = calculateVolume(y);
+  var x = org.offsetX; //The x coordinate for the pointer on pad
+  var y = org.offsetY; //The y coordinate for the pointer on pad
+  var noteValue = calculateNote(x); //Get the note based on the X value
+  var volumeValue = calculateVolume(y); //Get the volume based on the Y value
 
+  //Set note and volume
   oscillator.frequency.value = noteValue;
   gain.gain.value = volumeValue;
 
+  //Write the data on screen
   $('#frequency').text( Math.floor(noteValue) + ' Hz' );
   $('#volume').text(  Math.floor(volumeValue * 100) + '%' );
 }

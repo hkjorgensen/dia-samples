@@ -15,6 +15,7 @@ $(document).ready(function() {
   $('body').on('pointermove', onPointerMove);
 });
 
+//Setup audio, gain (volume), oscillator
 function setupSound() {
   audio = kattegatAudio.initialize();
   oscillator = audio.createOscillator();
@@ -37,67 +38,71 @@ function setupSound() {
   oscillator.start(0);
 }
 
+//When the user clicks/touches the screen
 function onPointerDown(e) {
+  //Save reference for the onPointerMove
   isPointerPressed = true;
 
   //Trigger a fake move so the box moves instantly
   onPointerMove(e);
 }
 
+//When the user stops clicking/touching the screen
 function onPointerUp() {
+  //Save reference for the onPointerMove
   isPointerPressed = false;
 }
 
 function onPointerMove(e) {
-  var pointerTop = e.originalEvent.clientY;
-  var pointerLeft = e.originalEvent.clientX;
-  var boxsize = $('aside').size();
-  var bodysize = $('body').size();
+  //Stop isn't pressed down
+  if (!isPointerPressed) { return; }
 
-  //If the point is pressed continue
-  if (isPointerPressed) {
-    var centerTop = bodysize.height/2;
-    var centerLeft = bodysize.width/2;
+  var pointerTop = e.originalEvent.clientY; //Get Y coordinate from the pointer
+  var pointerLeft = e.originalEvent.clientX; //Get X coordinate from the pointer
+  var boxsize = $('aside').size(); //Get the box size (width and height)
+  var bodysize = $('body').size(); //Get the screen size (width and height)
 
-    //Move the box
-    $('aside').css({
-      top: pointerTop - boxsize.height/2,
-      left: pointerLeft - boxsize.width/2
-    });
+  //Get center coordinates for the screen
+  var centerTop = bodysize.height/2;
+  var centerLeft = bodysize.width/2;
 
-    // How far from center (linear algebra)
-    // http://www.purplemath.com/modules/distform.htm
-    var top = pointerTop - centerTop;
-    var left = pointerLeft - centerLeft;
-    // Square root: http://www.w3schools.com/jsref/jsref_sqrt.asp
-    var delta = Math.sqrt( (top * top) + (left * left) );
+  //Move the box according to the pointer
+  //Do calculations(/2) center the box according to the pointer
+  $('aside').css({
+    top: pointerTop - boxsize.height/2,
+    left: pointerLeft - boxsize.width/2
+  });
 
-    // Find the max distance - same formular.
-    // (0, 0) is to the top left corner of the screen
-    var topMax = 0 - centerTop;
-    var leftMax = 0 - centerLeft;
-    var deltaMax = Math.sqrt( (topMax * topMax) + (leftMax * leftMax) );
+  // How far is the box from the center of screen (linear algebra)
+  // http://www.purplemath.com/modules/distform.htm
+  var top = pointerTop - centerTop;
+  var left = pointerLeft - centerLeft;
+  // Square root: http://www.w3schools.com/jsref/jsref_sqrt.asp
+  var delta = Math.sqrt( (top * top) + (left * left) );
 
-    //Get the delta value
-    var percentage = delta/deltaMax;
+  // Find the max distance (top-left corner to center of screen) - same formular.
+  var topMax = 0 - centerTop;
+  var leftMax = 0 - centerLeft;
+  var deltaMax = Math.sqrt( (topMax * topMax) + (leftMax * leftMax) );
 
-    //Start the tremolo effect
-    var absolute = percentage * 1;
-    var stopAfterSeconds = absolute;
-    var loopEveryMs = absolute * 2000; //Must be the double of stopAfterSeconds and in ms
+  //Get the delta value
+  var percentage = delta/deltaMax;
 
-    //Stop the running loop
-    clearInterval(interval);
-    gain.gain.cancelScheduledValues(audio.currentTime);
+  //Start the tremolo effect (turn volume up and down continuously)
+  var absolute = percentage * 1;
+  var stopAfterSeconds = absolute; //Me be in seconds
+  var loopEveryMs = absolute * 2000; //Must be the double of stopAfterSeconds and in ms (milliseconds)
 
-    function loop() {
-      //Set volume to 1 immediately
-      gain.gain.setValueAtTime(1, audio.currentTime);
-      //Set volume to 0 after "stopAfterSeconds"
-      gain.gain.setValueAtTime(0, audio.currentTime + stopAfterSeconds);
-    }
+  //Stop the existing loop
+  clearInterval(interval);
 
-    // Start the loop
-    interval = setInterval(loop, loopEveryMs);
+  function loop() {
+    //Set volume to 1 immediately
+    gain.gain.setValueAtTime(1, audio.currentTime);
+    //Set volume to 0 after "stopAfterSeconds"
+    gain.gain.setValueAtTime(0, audio.currentTime + stopAfterSeconds);
   }
+
+  // Start the new loop
+  interval = setInterval(loop, loopEveryMs);
 }
