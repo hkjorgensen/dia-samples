@@ -15,7 +15,11 @@ $(document).ready(function() {
   // Connect realtime stuff up
   socket = io.connect('/');
   socket.on('say', onSay);
+
+  //Attach eventlisteners to window
   $(window).on('devicemotion', onDeviceMotion);
+
+  //Attach reset button function
   $('#reset').on('pointerdown', resetValues);
 });
 
@@ -60,9 +64,17 @@ function onDeviceMotion(e) {
 
 //Do something with the data from a third device (Phone, tablet etc.)
 function onSay(motion) {
-  accelerationHandler(motion.acceleration);
-  accelerationIncludingGravityHandler(motion.accelerationIncludingGravity);
-  rotationRateHandler(motion.rotationRate);
+  if (motion.acceleration) {
+    accelerationHandler(motion.acceleration);
+  }
+
+  if (motion.accelerationIncludingGravity) {
+    accelerationIncludingGravityHandler(motion.accelerationIncludingGravity);
+  }
+
+  if (motion.rotationRate) {
+    rotationRateHandler(motion.rotationRate);
+  }
 }
 
 //Handle acceleration
@@ -78,9 +90,9 @@ function accelerationHandler(acceleration) {
   });
 
   //Update HTML
-  $('#ax').text(acceleration.x + ' - high/low: ' + ahigh.x + ' / ' + alow.x);
-  $('#ay').text(acceleration.y + ' - high/low: ' + ahigh.y + ' / ' + alow.y);
-  $('#az').text(acceleration.z + ' - high/low: ' + ahigh.z + ' / ' + alow.z);
+  $('#ax').html(acceleration.x + ' - high/low: ' + ahigh.x + ' / ' + alow.x);
+  $('#ay').html(acceleration.y + ' - high/low: ' + ahigh.y + ' / ' + alow.y);
+  $('#az').html(acceleration.z + ' - high/low: ' + ahigh.z + ' / ' + alow.z);
 }
 
 //Handle accelerationIncludingGravity
@@ -96,9 +108,9 @@ function accelerationIncludingGravityHandler(accelerationIncludingGravity) {
   });
 
   //Update HTML
-  $('#agx').text(accelerationIncludingGravity.x + ' - high/low: ' + aghigh.x + ' / ' + aglow.x);
-  $('#agy').text(accelerationIncludingGravity.y + ' - high/low: ' + aghigh.x + ' / ' + aglow.x);
-  $('#agz').text(accelerationIncludingGravity.z + ' - high/low: ' + aghigh.x + ' / ' + aglow.x);
+  $('#agx').html(accelerationIncludingGravity.x + ' - high/low: ' + aghigh.x + ' / ' + aglow.x);
+  $('#agy').html(accelerationIncludingGravity.y + ' - high/low: ' + aghigh.y + ' / ' + aglow.y);
+  $('#agz').html(accelerationIncludingGravity.z + ' - high/low: ' + aghigh.z + ' / ' + aglow.z);
 }
 
 //Handle rotationRate
@@ -114,7 +126,7 @@ function rotationRateHandler(rotationRate) {
   });
 
   //Update HTML
-  $('#ra').text(rotationRate.alpha + ' - high/low: ' + rhigh.alpha + ' / ' + rlow.alpha);
-  $('#rb').text(rotationRate.beta + ' - high/low: ' + rhigh.beta + ' / ' + rlow.beta);
-  $('#rg').text(rotationRate.gamma + ' - high/low: ' + rhigh.gamma + ' / ' + rlow.gamma);
+  $('#rra').html(rotationRate.alpha + ' - high/low: ' + rhigh.alpha + ' / ' + rlow.alpha);
+  $('#rrb').html(rotationRate.beta + ' - high/low: ' + rhigh.beta + ' / ' + rlow.beta);
+  $('#rrg').html(rotationRate.gamma + ' - high/low: ' + rhigh.gamma + ' / ' + rlow.gamma);
 }

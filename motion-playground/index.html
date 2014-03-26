@@ -12,33 +12,28 @@
 </head>
 <body touch-action="none">
   <h1>motion-playground</h1>
-  <p>Connect your phone and to start receiving data!</p>
+  <p>Connect your phone or tablet</p>
   <button class="pure-button" id="reset">Reset high/low</button>
 
   <h2>Output:</h2>
-  <section>
-    <h3>acceleration</h3>
-    <ul>
-      <li>x: <span id="ax">n/a</span></li>
-      <li>y: <span id="ay">n/a</span></li>
-      <li>z: <span id="az">n/a</span></li>
-    </ul>
-    <h3>accelerationIncludingGravity</h3>
-    <ul>
-      <li>x: <span id="agx">n/a</span></li>
-      <li>y: <span id="agy">n/a</span></li>
-      <li>z: <span id="agz">n/a</span></li>
-    </ul>
-  </section>
-  <section>
-    <h3>rotationRate</h3>
-    <ul>
-      <li>alpha: <span id="ra">n/a</span></li>
-      <li>beta: <span id="rb">n/a</span></li>
-      <li>gamma: <span id="rg">n/a</span></li>
-    </ul>
-  </section>
-
+  <h3>acceleration</h3>
+  <ul>
+    <li>x: <span id="ax">n/a</span></li>
+    <li>y: <span id="ay">n/a</span></li>
+    <li>z: <span id="az">n/a</span></li>
+  </ul>
+  <h3>accelerationIncludingGravity</h3>
+  <ul>
+    <li>x: <span id="agx">n/a</span></li>
+    <li>y: <span id="agy">n/a</span></li>
+    <li>z: <span id="agz">n/a</span></li>
+  </ul>
+  <h3>rotationRate</h3>
+  <ul>
+    <li>alpha: <span id="rra">n/a</span></li>
+    <li>beta: <span id="rrb">n/a</span></li>
+    <li>gamma: <span id="rrg">n/a</span></li>
+  </ul>
   <!-- Add in Socket.io: this is needed for any realtime stuff -->
   <script src="/socket.io/socket.io.js"></script>
   <script src="/bower_components/libraries.js"></script>
