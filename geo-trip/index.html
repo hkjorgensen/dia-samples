@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>geo-trip</title>
+
+	<!-- Make the page a bit more mobile-friendly -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, target-densitydpi=device-dpi">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	
+	<!-- Base stylesheets -->
+	<link rel='stylesheet' href='/bower_components/pure/pure-min.css'>
+	<link rel='stylesheet' href='/base.css'>
+
+	<!-- Stylesheet for this demo -->
+	<link rel='stylesheet' href='style.css'>
+</head>
+<body>
+	<h1>geo-trip</h1>
+	<p>
+		This demo shows how to do basic calculations between coordinates. 'Start' sets the first coordinate (and time), and every second, the location is compared to the start coordinate.
+	</p>
+	<button id="startButton" class="pure-button">Start</button>
+	<button id="stopButton" style="display:none" class="pure-button">Stop</button>
+
+	<h2>Start</h2>
+	<div id="startDetails"></div>
+
+	<h2>Current</h2>
+	<div id="currentDetails">
+		Distance: <span id="distance"></span> meters.
+		Speed: <span id="speed"></span> meters/sec.
+	</div>
+
+	<!-- Import libraries such as jQuery etc -->
+	<script src="/bower_components/libraries.js"></script>
+
+	<!-- Import the script file for this demo -->
+	<script src="script.js"></script>
+
+	<!-- Imports a script that does the live reloading trick -->
+	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js"></' + 'script>')</script>
+</body>
+</html>

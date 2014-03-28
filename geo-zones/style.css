@@ -1,0 +1,27 @@
+#position {
+	overflow-wrap: break-word;
+	margin: 1em;
+	font-size: 80%;
+	color: gray;
+}
+
+.zone {
+	background-color: white;
+	padding: 1em;
+	display: inline-block;
+}
+
+.zone.circle {
+	border-radius: 100%;
+}
+.zone.inside {
+	background-color: yellow;
+}
+
+#zones h1 {
+	font-size: 1em;
+}
+
+#zones .info {
+	height: 5em;
+}

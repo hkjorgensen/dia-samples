@@ -1,0 +1,26 @@
+#position {
+	overflow-wrap: break-word;
+	margin: 1em;
+	font-size: 80%;
+	color: gray;
+}
+
+.user {
+	background-color: white;
+	padding: 1em;
+	display: inline-block;
+}
+
+#users h1 {
+	font-size: 1em;
+}
+
+#users .info {
+	height: 5em;
+}
+
+.swatch {
+	width:1.5em;
+	height: 1.5em;
+	display: inline-block;
+}
