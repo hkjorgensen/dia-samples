@@ -1,7 +1,5 @@
-var startPos = null;
 var timerId = null;
-
-var circleZones = {};
+var circleZones = {}; // Keeps track of the zones
 
 $(document).ready(function() {
 	// Define zones to detect. Coordinates can be figured out
@@ -100,9 +98,10 @@ function onPositionReceived(e) {
 }
 
 
+// Update the graphical display for each zone
+// (this is just for debugging purposes)
 function updateCircleZoneDisplay() {
-	// Update the graphical display for each zone
-	// (this is just for debugging purposes)
+	// For each zone in circleZones...
 	_.each(circleZones, function(zone, name) {
 		// We presume that each zone has a corresponding HTML
 		// element 'zone-[name of zone]', eg 'zone-itu'
@@ -119,12 +118,16 @@ function updateCircleZoneDisplay() {
 
 // Computes distance and is in/out for each zone
 function computeCircleZones(coords) {
+	// For each zone in circleZones...
 	_.each(circleZones, function(zone, name) {
+		// Get center of zone and put into a object
 		var center = {
 			latitude: zone.coords[0],
 			longitude: zone.coords[1]
 		};
 
+		// Calculate distance and a boolean of whether
+		// we are inside or not, and assign to zone object
 		zone.distance = geolib.getDistance(coords, center);
 		zone.inside = geolib.isPointInCircle(coords, center, zone.radiusMeters)
 	});

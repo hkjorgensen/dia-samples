@@ -7,17 +7,15 @@ var ourName = "?";
 var ourId = null;
 var users = {};
 
-function nameSetClick(e) {
-	e.preventDefault(); // prevent form from submitting
-	ourName = $("form input[name='name']").val();
-}
-
 $(document).ready(function() {
 	$("#setButton").on("click", nameSetClick);
 	$("#pulseButton").on("click", pulseClick);
 
 	// Assign a random colour for ourselves
 	ourColour = getRandomColour();
+	$("#colourSwatch").css({
+		"background-color": ourColour
+	});
 	
 	// Connect realtime stuff up
 	socket = io.connect("http://" + window.location.host);
@@ -34,7 +32,7 @@ $(document).ready(function() {
 function requestLocationLoop() {
 	navigator.geolocation.getCurrentPosition(onPositionReceived, onPositionError, {
 		enableHighAccuracy: true,
-		timeout: 1000 // how to wait for a position
+		timeout: 1000 // how long to wait for a position
 	});
 	if (timerId == null) return;
 	timerId = setTimeout(requestLocationLoop, 2000);
@@ -42,8 +40,8 @@ function requestLocationLoop() {
 
 // Callback when an error occurs
 function onPositionError(error) {
-		kattegat.notifyError(error.message);
-		$("#position").text(error.message);
+	kattegat.notifyError(error.message);
+	$("#position").text(error.message);
 }
 
 // Called when our 'getCurrentPosition' request finishes and there is a position
@@ -73,7 +71,10 @@ function onPositionReceived(e) {
 }
 
 function computeDistances(coords) {
+	// For each user we know about
 	_.each(users, function(user, id) {
+		// Calculate their distance to us, and assign to the .distance field
+		// (distance is in meters)
 		user.distance = geolib.getDistance(coords, user.coords);
 	})
 }
@@ -90,29 +91,25 @@ function updateUsersDisplay() {
 	});
 }
 
-// Computes distance and is in/out for each zone
-function computeCircleZones(coords) {
-	_.each(circleZones, function(zone, name) {
-		var center = {
-			latitude: zone.coords[0],
-			longitude: zone.coords[1]
-		};
-
-		zone.distance = geolib.getDistance(coords, center);
-		zone.inside = geolib.isPointInCircle(coords, center, zone.radiusMeters)
-	});
-}
-
+// Triggered when ever we receive data from another client
 function onSay(e) { 
 	if (e.coords) {
-		// Keep track of location
+		// Got some coordinates
+
+		// Keep track of location, by associating received
+		// data with the 'users' array
 		users[e._clientId] = e;
+
+		// Update HTML element for user
 		var selector = addOrGetUser(e._clientId);
+
 		$(".swatch", selector).css("background-color", e.colour);
 		$("h1", selector).text(e.name);	
 	} else if (e.pulse) {
-		// Received a pulse
-		$("#user-" + e._clientId).transition({
+		// Received a pulse. Look up sender and
+		// do something funky to their HTML element
+		var selector = addOrGetUser(e._clientId);
+		$(selector).transition({
 			"background-color": "red"
 		}, 500, function() {
 			$(this).css("background-color", "white")			
@@ -120,34 +117,49 @@ function onSay(e) {
 	
 	} else {
 		// Some other type of message
+		// Log it so we can figure it out
 		console.dir(e);
 	}
 }
 
+// 'Pulse' is clicked
 function pulseClick(e) {
-	e.preventDefault();
+	e.preventDefault(); // Prevent form from submitting
+
+	// Send the data using socket.emit
 	socket.emit("say", {
 		room:roomName,
 		pulse: true
 	});
 }
 
+// Returns a selector for the HTML element which
+// holds user info. Creates HTML element if it doesn't
+// already exist
 function addOrGetUser(id) {
+	// If we don't already have a HTML element
 	if ($("#user-" +id).length == 0) {
+		// ...append it to the #users DIV
 		$("#users").append(
 			'<div id="user-' + id + '" class="user">' +
 				'<span class="swatch"></span><h1>' + id +'</h1>' +
 				'<div class="info"></div>' +
 			'</div');
 	}
+
+	// Finally, return a jQuery selector string
 	return "#user-" + id;
 }
 
 // Another user has disconnected
 function onLeave(e) {
-	console.dir(e);
+	// Server provides an 'id' property for the user
 	var id = e.id;
+
+	// Delete id from users we are tracking
 	delete users[id];
+
+	// Delete associated HTML element
 	$("#user-"+id).remove();
 }
 
@@ -157,7 +169,15 @@ function onHello(e) {
 	// We'll only send and receive messages to this room
 	socket.emit("join", {room:roomName});
 	ourId = e.id;
-	//updateOurInfo();	
+}
+
+
+// Called when user clicks 'set'
+function nameSetClick(e) {
+	e.preventDefault(); // prevent form from submitting
+
+	// Set typed value to the `ourName` variable
+	ourName = $("form input[name='name']").val();
 }
 
 

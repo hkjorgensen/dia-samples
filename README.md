@@ -52,6 +52,7 @@ $ git pull
 ````
 
 ## Remote debugging
+
 When testing your sketches on a tablet or mobile, it's very usfeul to use "remote debugging" so you can see your `console.log` messsages, inspect the DOM and so on.
 
 Remote debugging is available for iOS and Android, and is very simple to set up. Read more:
@@ -59,6 +60,49 @@ Remote debugging is available for iOS and Android, and is very simple to set up.
 * [How to remote debug on iOS](http://moduscreate.com/enable-remote-web-inspector-in-ios-6/)
 * [How to remote debug on Android](https://developers.google.com/chrome-developer-tools/docs/remote-debugging)
 
-## Ressources
+## Resources
+
 * [Alphabetical list of CSS Properties](http://ref.openweb.io/CSS/)
 * [$/jQuery API](http://api.jquery.com)
+
+## Deplying to the web
+
+Many of the samples will work if you put them on a standard web server. It's only those that use the Kattegat realtime or storage features which will not work. For this to work, you'll need to copy some support files and change the reference to these files in your project.
+
+Let's assume you are deploying to a web server via FTP, and your base web directory is `public_html`.
+
+1. Copy `bower_components\libraries.js`, `bower_components\pure\pure-min.css` and `public\base.css` to your `public_html` directory
+2. Edit your project's `index.html` file, and change:
+
+````
+	<!-- Base stylesheets -->
+	<link rel='stylesheet' href='/bower_components/pure/pure-min.css'>
+	<link rel='stylesheet' href='/base.css'>
+	...
+	<!-- Import libraries such as jQuery etc -->
+	<script src="/bower_components/libraries.js"></script>
+````
+
+to:
+
+````
+	<!-- Base stylesheets -->
+	<link rel='stylesheet' href='../pure-min.css'>
+	<link rel='stylesheet' href='../base.css'>
+	...
+	<!-- Import libraries such as jQuery etc -->
+	<script src="../libraries.js"></script>
+````
+
+3. Copy your project's directory to `public_html`. The file structure should look like:
+
+````
+public_html
+ yourproject\
+  index.html
+  script.js
+  style.css
+ pure_min.css
+ base.css
+ libraries.js
+````

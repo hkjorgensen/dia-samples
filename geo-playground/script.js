@@ -9,17 +9,13 @@ $(document).ready(function() {
 	$("#startWatchingButton").on("click", startWatching);
 	$("#stopWatchingButton").on("click", stopWatching);
 	
-	if (!window.cloudMadeApiKey) {
-		kattegat.notifyError("Map API key missing, edit apiKey.js");
-		return;
-	}
-
 	// Set up the map
 	map = L.map('map');
-	L.tileLayer('http://{s}.tile.cloudmade.com/' + window.cloudMadeApiKey + '/997/256/{z}/{x}/{y}.png', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-    maxZoom: 18
+	L.tileLayer('http://tiles.ibikecph.dk/webtiles/{z}/{x}/{y}.png', {
+		maxZoom: 18,
+		attribution: '"Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 IBikeCPH'
 	}).addTo(map);
+
 
 	// Create a circle for our current position
 	// ...we use dummy values because it gets changed when we receive a location
