@@ -5,16 +5,17 @@ var socket = null;
 $(document).ready(function() {
   // Connect realtime stuff up
   socket = io.connect('/');
+  socket.on('say', onSay);
 
   // Trigger is mobile show overlay
   if (kattegat.device.mobile()) {
     $('aside').hide();
     $('#overlay').show();
-    // Attach eventlisteners to window
-    $(window).on('devicemotion', onDeviceMotion);
-  } else {
-    socket.on('say', onSay);
   }
+
+  // Attach eventlisteners to window
+  $(window).on('devicemotion', onDeviceMotion);
+
 });
 
 // Collect data and send it to the server

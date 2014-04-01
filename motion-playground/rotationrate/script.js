@@ -23,17 +23,17 @@ $(document).ready(function() {
 
   // Connect realtime stuff up
   socket = io.connect('/');
+  socket.on('say', onSay);
 
   if (kattegat.device.mobile()) {
     // Hide raw data on mobiles
     $('#dataDisplay').hide();
     $('#overlay').show();
-    // Device supports 'devicemotion' event
-    if (window.DeviceMotionEvent) {
-      $(window).on('devicemotion', onDeviceMotion);
-    }
-  } else {
-    socket.on('say', onSay);
+  }
+
+  // Device supports 'devicemotion' event
+  if (window.DeviceMotionEvent) {
+    $(window).on('devicemotion', onDeviceMotion);
   }
 
 });

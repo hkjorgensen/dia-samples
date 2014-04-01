@@ -6,14 +6,16 @@ $(document).ready(function() {
 
   // Connect realtime stuff up
   socket = io.connect('/');
+  socket.on('say', onSay);
 
   // Trigger is mobile show overlay
   if (kattegat.device.mobile()) {
     //Attach eventlisteners to window
-    $(window).on('deviceorientation', onDeviceOrientation);
-  } else {
-    socket.on('say', onSay);
+    $('.displayInfo').hide();
+    $('#overlay').show();
   }
+
+  $(window).on('deviceorientation', onDeviceOrientation);
 });
 
 function onDeviceOrientation(e) {
