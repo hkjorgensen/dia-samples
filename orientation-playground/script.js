@@ -7,10 +7,16 @@ $(document).ready(function() {
   // Connect realtime stuff up
   socket = io.connect('/');
   socket.on('say', onSay);
-  //Attach eventlisteners to window
-  $(window).on('devicemotion', onDeviceMotion);
-});
 
+  // Trigger is mobile show overlay
+  if (kattegat.device.mobile()) {
+    //Attach eventlisteners to window
+    $('.displayInfo').hide();
+    $('#overlay').show();
+  }
+
+  $(window).on('deviceorientation', onDeviceOrientation);
+});
 
 function onDeviceOrientation(e) {
   var motion = e.originalEvent;

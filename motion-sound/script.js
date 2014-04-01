@@ -17,13 +17,12 @@ $(document).ready(function() {
   } else {
     // Not a mobile
     initAudio();
-    socket.on('say', onSay);  
+    socket.on('say', onSay);
   }
 
   if (window.DeviceMotionEvent) {
     $(window).on('devicemotion', onDeviceMotion);
   }
-   
 });
 
 function initAudio() {

@@ -35,7 +35,7 @@ $(document).ready(function() {
   if (window.DeviceMotionEvent) {
     $(window).on('devicemotion', onDeviceMotion);
   }
-   
+
 });
 
 //Collect data and send it to the server
@@ -81,8 +81,8 @@ function onSay(motion) {
   $('#gamma').html(d.gamma.toFixed(3) + '<br>high: ' + gamma.getHigh().toFixed(3) + '<br>low: ' + gamma.getLow().toFixed(3) + '<br>smoothed: ' + gamma.get().toFixed(3));
 
   // Plot numbers
-  $.plot($("#plot"), [ 
-    { color:"red",  data:alpha.getIndexedData() }, 
+  $.plot($("#plot"), [
+    { color:"red",  data:alpha.getIndexedData() },
     { color:"blue", data:beta.getIndexedData() },
     { color:"green",data:gamma.getIndexedData() }
     ], options);
