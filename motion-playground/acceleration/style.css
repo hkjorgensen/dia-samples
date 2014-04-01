@@ -1,12 +1,12 @@
-li {
-  margin-bottom: 50px;
-}
-
-section {
-  height: 200px;
-}
-
 #overlay {
   display: none;
 }
 
+.data {
+	float: left;
+	padding: 0.5em;
+}
+
+section {
+	height: 350px;
+}

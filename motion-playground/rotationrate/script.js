@@ -1,46 +1,13 @@
 // Initialise a few variables
 var socket = null;
 var options = null;
-var sampleSize = null;
 
-var highBeta = null;
-var lowBeta = null;
-var meanBeta = null;
+var alpha = null;
+var beta = null;
+var gamma = null;
 
-var highAlpha = null;
-var lowAlpha = null;
-var meanAlpha = null;
 
-var highGamma = null;
-var lowGamma = null;
-var meanGamma = null;
-
-var data = {
-  beta:[],
-  alpha:[],
-  gamma:[]
-};
-
-//Small function to check if phone device
-var isMobile = {
-  Android: function() {
-      return navigator.userAgent.match(/Android/i);
-  },
-  iOS: function() {
-      return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-  },
-  Opera: function() {
-      return navigator.userAgent.match(/Opera Mini/i);
-  },
-  Windows: function() {
-      return navigator.userAgent.match(/IEMobile/i);
-  },
-  any: function() {
-      return (isMobile.Android() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-  }
-};
-
-//When the browser is ready
+// When the browser is ready
 $(document).ready(function() {
   // setup graph
   options = {
@@ -49,20 +16,26 @@ $(document).ready(function() {
     xaxis: { show: false }
   };
 
-  sampleSize = 200;
+  var sampleSize = 200;
+  alpha = new Smoother(sampleSize);
+  beta = new Smoother(sampleSize);
+  gamma = new Smoother(sampleSize);
 
   // Connect realtime stuff up
   socket = io.connect('/');
   socket.on('say', onSay);
 
-  //Trigger is mobile show overlay
-  if ( isMobile.any() ) {
-    $('ul').hide();
+  if (kattegat.device.mobile()) {
+    // Hide raw data on mobiles
+    $('#dataDisplay').hide();
     $('#overlay').show();
-  } else {
-    //Attach eventlisteners to window
+  }
+
+  // Device supports 'devicemotion' event
+  if (window.DeviceMotionEvent) {
     $(window).on('devicemotion', onDeviceMotion);
   }
+   
 });
 
 //Collect data and send it to the server
@@ -95,54 +68,22 @@ function onDeviceMotion(e) {
 
 //Do something with the data from a third device (Phone, tablet etc.)
 function onSay(motion) {
-  var rotationRate = motion.rotationRate;
+  var d = motion.rotationRate;
 
-  data.alpha.push(rotationRate.alpha);
-  if (data.alpha.length > sampleSize) { data.alpha.shift(); }
-  var resAlpha = [];
-  for (var i = 0; i < data.alpha.length; ++i){
-    resAlpha.push([i, data.alpha[i]]);
+  // Keep track of the data
+  alpha.push(d.alpha);
+  beta.push(d.beta);
+  gamma.push(d.gamma);
 
-    if (data.alpha[i] > highAlpha) { highAlpha = data.alpha[i]; }
-    if (data.alpha[i] < lowAlpha) { lowAlpha = data.alpha[i]; }
-    meanAlpha = meanAlpha + data.alpha[i];
-  }
+  // Show numbers
+  $('#alpha').html(d.alpha.toFixed(3) + '<br>high: ' + alpha.getHigh().toFixed(3) + '<br>low: ' + alpha.getLow().toFixed(3) + '<br>smoothed: ' + alpha.get().toFixed(3));
+  $('#beta').html(d.beta.toFixed(3) + '<br>high: ' + beta.getHigh().toFixed(3) + '<br>low: ' + beta.getLow().toFixed(3) + '<br>smoothed: ' + beta.get().toFixed(3));
+  $('#gamma').html(d.gamma.toFixed(3) + '<br>high: ' + gamma.getHigh().toFixed(3) + '<br>low: ' + gamma.getLow().toFixed(3) + '<br>smoothed: ' + gamma.get().toFixed(3));
 
-  meanAlpha = meanAlpha / data.alpha.length;
-
-  $('#alpha').html(rotationRate.alpha + '<br>high/low: ' + highAlpha + ' / ' + lowAlpha + '<br>mean: ' + meanAlpha);
-  $.plot($("#plotalpha"), [ resAlpha ], options);
-
-  //Update beta
-  data.beta.push(rotationRate.beta);
-  if (data.beta.length > sampleSize) { data.beta.shift(); }
-  var resBeta = [];
-  for (var i = 0; i < data.beta.length; ++i){
-    resBeta.push([i, data.beta[i]]);
-
-    if (data.beta[i] > highBeta) { highBeta = data.beta[i]; }
-    if (data.beta[i] < lowBeta) { lowBeta = data.beta[i]; }
-    meanBeta = meanBeta + data.beta[i];
-  }
-
-  meanBeta = meanBeta / data.beta.length;
-
-  $('#beta').html(rotationRate.beta + '<br>high/low: ' + highBeta + ' / ' + lowBeta + '<br>mean: ' + meanBeta);
-  $.plot($("#plotbeta"), [ resBeta ], options);
-
-  data.gamma.push(rotationRate.gamma);
-  if (data.gamma.length > sampleSize) { data.gamma.shift(); }
-  var resGamma = [];
-  for (var i = 0; i < data.gamma.length; ++i){
-    resGamma.push([i, data.gamma[i]]);
-
-    if (data.gamma[i] > highGamma) { highGamma = data.gamma[i]; }
-    if (data.gamma[i] < lowGamma) { lowGamma = data.gamma[i]; }
-    meanGamma = meanGamma + data.gamma[i];
-  }
-
-  meanGamma = meanGamma / data.gamma.length;
-
-  $('#gamma').html(rotationRate.gamma + '<br>high/low: ' + highGamma + ' / ' + lowGamma + '<br>mean: ' + meanGamma);
-  $.plot($("#plotgamma"), [ resGamma ], options);
+  // Plot numbers
+  $.plot($("#plot"), [ 
+    { color:"red",  data:alpha.getIndexedData() }, 
+    { color:"blue", data:beta.getIndexedData() },
+    { color:"green",data:gamma.getIndexedData() }
+    ], options);
 }
