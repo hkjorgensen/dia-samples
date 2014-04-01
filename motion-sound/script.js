@@ -32,8 +32,14 @@ $(document).ready(function() {
   //Start the oscillator immediatly
   oscillator.start(0);
 
-  //Attach eventlisteners to window
-  $(window).on('devicemotion', onDeviceMotion);
+  //Trigger is mobile show overlay
+  if ( isMobile.any() ) {
+    $('p').hide();
+    $('#overlay').show();
+  } else {
+    //Attach eventlisteners to window
+    $(window).on('devicemotion', onDeviceMotion);
+  }
 });
 
 //Collect data and send it to the server
