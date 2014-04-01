@@ -57,7 +57,7 @@ function requestLocationLoop() {
 
 	navigator.geolocation.getCurrentPosition(onPositionReceived, onPositionError, {
 		enableHighAccuracy: true,
-		timeout: 1000
+		timeout: 10000
 	});
 	if (timerId == null) return;
 	timerId = setTimeout(requestLocationLoop, 1000);

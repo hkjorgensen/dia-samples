@@ -38,7 +38,7 @@ function requestLocation() {
 
 	navigator.geolocation.getCurrentPosition(onPositionReceived, onPositionError, {
 		enableHighAccuracy: true,
-		timeout: 1000
+		timeout: 10000
 	});		
 
 }

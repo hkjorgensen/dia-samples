@@ -25,6 +25,10 @@ $(document).ready(function() {
 
 	// Start location-fetching loop
 	timerId = setTimeout(requestLocationLoop, 2000);
+
+	// Set up vibration (not for iOS devices)
+	navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+
 })
 
 // This function calls itself every 2000 milliseconds,
@@ -32,7 +36,7 @@ $(document).ready(function() {
 function requestLocationLoop() {
 	navigator.geolocation.getCurrentPosition(onPositionReceived, onPositionError, {
 		enableHighAccuracy: true,
-		timeout: 1000 // how long to wait for a position
+		timeout: 10000 // how long to wait for a position
 	});
 	if (timerId == null) return;
 	timerId = setTimeout(requestLocationLoop, 2000);
@@ -115,6 +119,10 @@ function onSay(e) {
 			$(this).css("background-color", "white")			
 		});
 	
+		// Vibrate if we can (Read more: http://www.sitepoint.com/use-html5-vibration-api/)
+		if (navigator.vibrate) {
+			navigator.vibrate([500,200,500]);
+		}
 	} else {
 		// Some other type of message
 		// Log it so we can figure it out

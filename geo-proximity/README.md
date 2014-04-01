@@ -24,3 +24,4 @@ To make testing easier, you can fake your location. Open up Chrome's console, an
 * Map library, [Leaflet API reference](http://leafletjs.com/reference.html)
 * [Geolib](https://github.com/manuelbieh/Geolib) (included in Kattegat `libraries.js`)
 * [Gelocation overrides](https://developers.google.com/chrome-developer-tools/docs/mobile-emulation#device-geolocation-overrides)
+* [Vibration API](http://www.sitepoint.com/use-html5-vibration-api/)
