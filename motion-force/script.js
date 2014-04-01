@@ -1,5 +1,23 @@
 // Initialise a few variables
 var socket = null;
+//Small function to check if phone device
+var isMobile = {
+  Android: function() {
+      return navigator.userAgent.match(/Android/i);
+  },
+  iOS: function() {
+      return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+  },
+  Opera: function() {
+      return navigator.userAgent.match(/Opera Mini/i);
+  },
+  Windows: function() {
+      return navigator.userAgent.match(/IEMobile/i);
+  },
+  any: function() {
+      return (isMobile.Android() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+  }
+};
 
 //When the browser is ready
 $(document).ready(function() {
@@ -7,8 +25,14 @@ $(document).ready(function() {
   socket = io.connect('/');
   socket.on('say', onSay);
 
-  //Attach eventlisteners to window
-  $(window).on('devicemotion', onDeviceMotion);
+  //Trigger is mobile show overlay
+  if ( isMobile.any() ) {
+    $('aside').hide();
+    $('#overlay').show();
+  } else {
+    //Attach eventlisteners to window
+    $(window).on('devicemotion', onDeviceMotion);
+  }
 });
 
 //Collect data and send it to the server

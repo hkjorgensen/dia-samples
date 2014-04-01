@@ -6,3 +6,7 @@ aside {
   height: 100px;
   background: pink;
 }
+
+#overlay {
+  display: none;
+}
