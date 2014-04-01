@@ -5,15 +5,15 @@ var socket = null;
 $(document).ready(function() {
   // Connect realtime stuff up
   socket = io.connect('/');
-  socket.on('say', onSay);
 
   // Trigger is mobile show overlay
   if (kattegat.device.mobile()) {
     $('aside').hide();
     $('#overlay').show();
-  } else {
     // Attach eventlisteners to window
     $(window).on('devicemotion', onDeviceMotion);
+  } else {
+    socket.on('say', onSay);
   }
 });
 
@@ -47,10 +47,6 @@ function onDeviceMotion(e) {
 
 // Do something with the data from a third device (Phone, tablet etc.)
 function onSay(motion) {
-  updateBoxPosition(motion);
-}
-
-function updateBoxPosition(motion) {
   var d = motion.accelerationIncludingGravity;
 
   // Get sizes of window and box
@@ -61,7 +57,7 @@ function updateBoxPosition(motion) {
   var left = $('aside').offset().left;
   var top = $('aside').offset().top;
 
-  // Apply accelration
+  // Apply acceleration
   left = left + d.x;
   top = top + d.y;
 

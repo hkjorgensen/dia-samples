@@ -20,18 +20,19 @@ $(document).ready(function() {
 
   // Connect realtime stuff up
   socket = io.connect('/');
-  socket.on('say', onSay);
 
   if (kattegat.device.mobile()) {
     // Hide raw data on mobiles
     $('#dataDisplay').hide();
     $('#overlay').show();
+    // Device supports 'devicemotion' event
+    if (window.DeviceMotionEvent) {
+      $(window).on('devicemotion', onDeviceMotion);
+    }
+  } else {
+    socket.on('say', onSay);
   }
 
-  // Device supports 'devicemotion' event
-  if (window.DeviceMotionEvent) {
-    $(window).on('devicemotion', onDeviceMotion);
-  }
 });
 
 //Collect data and send it to the server
@@ -75,10 +76,10 @@ function onSay(motion) {
   $('#ax').html(d.x.toFixed(3) + '<br>high: ' + x.getHigh().toFixed(3) + '<br>low: ' + x.getLow().toFixed(3) + '<br>smoothed: ' + x.get().toFixed(3));
   $('#ay').html(d.y.toFixed(3) + '<br>high: ' + y.getHigh().toFixed(3) + '<br>low: ' + y.getLow().toFixed(3) + '<br>smoothed: ' + y.get().toFixed(3));
   $('#az').html(d.z.toFixed(3) + '<br>high: ' + z.getHigh().toFixed(3) + '<br>low: ' + z.getLow().toFixed(3) + '<br>smoothed: ' + z.get().toFixed(3));
-    
+
   // Plot numbers
-  $.plot($("#plot"), [ 
-    { color:"red",  data:x.getIndexedData() }, 
+  $.plot($("#plot"), [
+    { color:"red",  data:x.getIndexedData() },
     { color:"blue", data:y.getIndexedData() },
     { color:"green",data:z.getIndexedData() }
     ], options);

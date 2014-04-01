@@ -14,16 +14,16 @@ $(document).ready(function() {
     // Mobile device, don't play here
     $('p').hide();
     $('#overlay').show();
+
+    if (window.DeviceMotionEvent) {
+      $(window).on('devicemotion', onDeviceMotion);
+    }
   } else {
     // Not a mobile
     initAudio();
-    socket.on('say', onSay);  
+    socket.on('say', onSay);
   }
 
-  if (window.DeviceMotionEvent) {
-    $(window).on('devicemotion', onDeviceMotion);
-  }
-   
 });
 
 function initAudio() {
