@@ -10,7 +10,7 @@
   <link rel='stylesheet' href='/base.css'>
   <link rel='stylesheet' href='style.css'>
 </head>
-<body touch-action="none">
+<body kattegat-livereload="true"  touch-action="none">
   <h1>motion-sound</h1>
   <p>Load this page on your mobile or tablet to hear a change</p>
   <p><span id="volume">n/a</span>%</p>
@@ -18,8 +18,10 @@
 
   <!-- Add in Socket.io: this is needed for any realtime stuff -->
   <script src="/socket.io/socket.io.js"></script>
+  
+  <!-- Add in libraries and our own script -->
   <script src="/bower_components/libraries.js"></script>
   <script src="script.js"></script>
-  <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js"></' + 'script>')</script>
+  
 </body>
 </html>

@@ -20,29 +20,24 @@
 	<link rel='stylesheet' href='style.css'>
 
 </head>
-<body>
+<body kattegat-livereload="true">
 	<fieldset id="console">
 		<input placeholder="Type here" />
 		<button class="pure-button">OK</button>
 	</fieldset>
-</body>
 
-<!-- SCRIPT REFERENCING
-     Here we pull in Javascript files for the page.
-     It's a good idea to keep JS separate from HTML.
-     -->
+	<!-- SCRIPT REFERENCING
+	     Here we pull in Javascript files for the page.
+	     It's a good idea to keep JS separate from HTML.
+	     -->
 
-<!-- Import libraries such as jQuery etc -->
-<script src="/bower_components/libraries.js"></script>
+	<!-- Import libraries such as jQuery etc -->
+	<script src="/bower_components/libraries.js"></script>
 
-<!-- Import our own Javascript which is special for this page.
-     This is the one you want to edit to change the interactivity.
-        (It's located on your computer: BASE/public/square/script.js)
-     -->
-<script src="script.js"></script>
+	<!-- Import our own Javascript which is special for this page.
+	     This is the one you want to edit to change the interactivity.
+	        (It's located on your computer: BASE/public/square/script.js)
+	     -->
+	<script src="script.js"></script>
 
-<!-- Imports a script that does the live reloading trick -->
-<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js"></' + 'script>')</script>
-
-<!-- Page generated on 2014-01-25 -->
-</html>
+</body></html>

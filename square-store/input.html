@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html><head>
 	<title>square-store input</title>
 
 	<!-- Make the page a bit more mobile-friendly -->
@@ -12,23 +11,20 @@
 	<link rel='stylesheet' href='style.css'>
 
 </head>
-<body>
+<body kattegat-livereload="true">
 	<fieldset id="console">
 		<input placeholder="Type here" />
 		<button class="pure-button">OK</button>
 	</fieldset>
 	<p>Try 'square', 'colour <em>colour</em>' (eg 'colour black'), and 'clear colour'</p>
-</body>
 
-<!-- Import libraries such as jQuery etc -->
-<script src="/bower_components/libraries.js"></script>
+	<!-- Import libraries such as jQuery etc -->
+	<script src="/bower_components/libraries.js"></script>
 
-<!-- Add in Socket.io: this is needed for any realtime stuff -->
-<script src="/socket.io/socket.io.js"></script>
+	<!-- Add in Socket.io: this is needed for any realtime stuff -->
+	<script src="/socket.io/socket.io.js"></script>
 
-<script src="input.js"></script>
+	<!-- Import a script just for this 'input' sketch -->
+	<script src="input.js"></script>
 
-<!-- Imports a script that does the live reloading trick -->
-<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js"></' + 'script>')</script>
-
-</html>
+</body></html>
