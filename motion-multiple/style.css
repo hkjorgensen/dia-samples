@@ -1,0 +1,15 @@
+#overlay {
+  display: none;
+}
+
+#match {
+  height: 20px;
+  background: lightgreen;
+}
+
+aside {
+  margin-bottom: 20px;
+  width: 300px;
+  padding: 20px;
+  border: 2px dashed grey;
+}
