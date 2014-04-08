@@ -205,25 +205,3 @@ function getRangeAverage(array, start, stop) {
   average = values/(stop-start);
   return average;
 }
-
-
-// Helper class to smooth data values.
-// See it in action above.
-function Smoother(samples) {
-  this.data = new Array();
-  for (var i=0;i<samples; i++) {
-    this.data.push(0);
-  }
-}
-Smoother.prototype.push = function(v) {
-    this.data.shift();
-    this.data.push(v);
-}
-Smoother.prototype.get = function() {
-  var count = 0;
-  for (var i=0;i<this.data.length; i++) {
-    count += this.data[i];
-  }
-  count = count / this.data.length;
-  return count;
-}
