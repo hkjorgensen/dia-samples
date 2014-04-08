@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>cv-face</title>
+
+  <meta charset="UTF-8">
+  <!-- Make the page a bit more mobile-friendly -->
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Reference the base stylesheets.
+       You don't need to use them but they are a useful starting point.
+       -->
+  <link rel='stylesheet' href='/bower_components/pure/pure-min.css'>
+  <link rel='stylesheet' href='/base.css'>
+
+  <!-- If you want to make changes,
+       edit BASE/public/pointer-drag/style.css
+       -->
+  <link rel='stylesheet' href='style.css'>
+</head>
+<body kattegat-livereload="true"  touch-action="none">
+  <div id="controls">
+    <button id="previewButton" class="pure-button">Preview</button>
+    <button id="stopButton" class="pure-button">Stop</button>
+    <button id="startButton" style="display:none" class="pure-button">Start</button>
+  </div>
+
+  
+  <div id="status">
+    <span id="tracking">Tracking</span>
+    Area: <span id="faceArea">Area</span>
+  </div>
+
+  <video id="video" width="640" height="480" style="display:none"></video>
+  <div id="box"></div>
+  <canvas id="canvas" width="640" height="480"></canvas>
+
+ 
+  <!-- SCRIPT REFERENCING
+       Here we pull in Javascript files for the page.
+       It's a good idea to keep JS separate from HTML.
+       -->
+
+  <!-- Import libraries such as jQuery etc -->
+  <script src="/bower_components/libraries.js"></script>
+
+  <!-- Import our own Javascript which is special for this page.
+       This is the one you want to edit to change the interactivity.
+          (It's located on your computer: BASE/public/pointer-drag/script.js)
+       -->
+  <script src="bbf_face.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>

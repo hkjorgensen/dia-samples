@@ -1,0 +1,20 @@
+#box {
+  position: absolute;
+  height: 2em;
+  width: 2em;
+  background-color: #0080FF;
+  left: 100px;
+  top: 100px;
+}
+#canvas {
+  opacity: 0.5;
+}
+
+
+#status span {
+  display: inline-block;
+  padding: 1em;
+}
+#status span.active {
+  background-color: #FFFF80;
+}
